@@ -35,7 +35,7 @@ func GetComic(comicID int) (comic Comic, err error) {
 func main() {
 	start := time.Now()
 	defer func() {
-		fmt.Println("Execution Time: ", time.Since(start).Seconds())
+		fmt.Println("Execution Time: ", time.Since(start))
 	}()
 
 	comicsNeeded := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
