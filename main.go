@@ -32,12 +32,6 @@ func getComic(comicID int) (comic *Comic, err error) {
 	return comic, nil
 }
 
-// concurrent
-func main() {
-	nonConcurrent()
-	concurrent()
-}
-
 // non concurrent
 func nonConcurrent() {
 	start := time.Now()
@@ -86,4 +80,10 @@ func concurrent() {
 	}
 
 	wg.Wait()
+}
+
+// concurrent
+func main() {
+	nonConcurrent()
+	concurrent()
 }

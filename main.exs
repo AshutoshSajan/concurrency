@@ -31,5 +31,36 @@ defmodule Benchmark do
   end
 end
 
-Benchmark.measure(fn -> Concurrency.non_concurrent() end)
-Benchmark.measure(fn -> Concurrency.concurrent() end)
+# Benchmark.measure(fn -> Concurrency.non_concurrent() end)
+# Benchmark.measure(fn -> Concurrency.concurrent() end)
+
+t1 = :os.system_time(:millisecond)
+Concurrency.non_concurrent()
+t2 = :os.system_time(:millisecond)
+
+time_diff = t2 - t1
+
+IO.inspect("#{time_diff} ms", label: "non_concurrent_time_diff")
+
+t1 = :os.system_time(:millisecond)
+Concurrency.concurrent()
+t2 = :os.system_time(:millisecond)
+
+time_diff = t2 - t1
+
+IO.inspect("#{time_diff} ms", label: "concurrent_time_diff")
+
+# defmodule TimeDiff do
+#   def get_time_diff(function, label) do
+#     t1 = :os.system_time(:millisecond)
+#     function()
+#     t2 = :os.system_time(:millisecond)
+#     time_diff = t2 - t1
+#     IO.inspect("#{time_diff} ms", label: "#{label}_time_diff")
+#   end
+# end
+
+# [label1, label2] = ["concurrent", "non_concurrent"]
+
+# TimeDiff.get_time_diff(fn -> Concurrency[label1], "non_concurrent_time_diff" end)
+# TimeDiff.get_time_diff(Concurrency[label2], "concurrent_time_diff")
